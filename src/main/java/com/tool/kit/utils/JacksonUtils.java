@@ -8,8 +8,12 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.sun.codemodel.JCodeModel;
 import lombok.extern.slf4j.Slf4j;
+import org.jsonschema2pojo.*;
+import org.jsonschema2pojo.rules.RuleFactory;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -147,6 +151,27 @@ public class JacksonUtils {
 		}
 
 		return null;
+	}
+
+	public static void convertJsonToJavaClass(String json, File outputDirectory, String packageName, String className) {
+		JCodeModel jcodeModel = new JCodeModel();
+		GenerationConfig config = new DefaultGenerationConfig() {
+			@Override
+			public boolean isGenerateBuilders() {
+				return true;
+			}
+			@Override
+			public SourceType getSourceType() {
+				return SourceType.JSON;
+			}
+		};
+		SchemaMapper mapper = new SchemaMapper(new RuleFactory(config, new Jackson2Annotator(config), new SchemaStore()), new SchemaGenerator());
+		try {
+			mapper.generate(jcodeModel, className, packageName, json);
+			jcodeModel.build(outputDirectory);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }
