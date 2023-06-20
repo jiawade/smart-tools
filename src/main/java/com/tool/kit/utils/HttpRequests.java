@@ -25,11 +25,6 @@ public class HttpRequests {
 
     }
 
-    public HttpRequests(String host, int port) {
-        this.host = host;
-        this.port = port;
-    }
-
 
     public HttpRequests setProxy(String host, int port) {
         if (isConnectionSetup) {

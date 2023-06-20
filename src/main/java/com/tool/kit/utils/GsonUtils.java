@@ -20,6 +20,8 @@ public class GsonUtils {
             registerTypeAdapter(LocalDate.class, new LocalDateAdaptor()).
             registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdaptor()).
             serializeSpecialFloatingPointValues().
+            serializeNulls().
+            setLenient().
             setPrettyPrinting().
             create();
 

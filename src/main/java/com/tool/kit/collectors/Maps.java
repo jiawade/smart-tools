@@ -95,12 +95,6 @@ public class Maps {
         return new EnumMap<>(map);
     }
 
-    public static <K extends Enum<K>, V> EnumMap<K, V> enumMap(K key, V value) {
-        EnumMap<K, V> map = new EnumMap<>(key.getClass());
-        map.put(key, value);
-        return map;
-    }
-
     public static <K, V> Map<K, V> mergeCollectionToMap(List<K> keys, List<V> values) {
         if (keys.isEmpty()) {
             throw new IllegalArgumentException("key size must greater than 0");
