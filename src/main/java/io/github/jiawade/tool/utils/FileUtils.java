@@ -1,6 +1,6 @@
-package com.tool.kit.utils;
+package io.github.jiawade.tool.utils;
 
-import com.tool.kit.exception.SystemIOException;
+import io.github.jiawade.tool.exception.SystemIOException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.*;
 
@@ -54,7 +54,7 @@ public class FileUtils {
         try {
             return org.apache.commons.io.FileUtils.checksum(file, checksum);
         } catch (IOException e) {
-            throw new SystemIOException("unable to read file");
+            throw new SystemIOException(e.toString());
         }
     }
 
@@ -62,7 +62,7 @@ public class FileUtils {
         try {
             return org.apache.commons.io.FileUtils.checksumCRC32(file);
         } catch (IOException e) {
-            throw new SystemIOException("unable to read file");
+            throw new SystemIOException(e.toString());
         }
     }
 
@@ -70,7 +70,7 @@ public class FileUtils {
         try {
             org.apache.commons.io.FileUtils.cleanDirectory(directory);
         } catch (IOException e) {
-            throw new SystemIOException("unable to read file");
+            throw new SystemIOException(e.toString());
         }
     }
 
@@ -78,7 +78,7 @@ public class FileUtils {
         try {
             return org.apache.commons.io.FileUtils.contentEquals(file1, file2);
         } catch (IOException e) {
-            throw new SystemIOException("unable to read file");
+            throw new SystemIOException(e.toString());
         }
     }
 
@@ -86,7 +86,7 @@ public class FileUtils {
         try {
             return org.apache.commons.io.FileUtils.contentEqualsIgnoreEOL(file1, file2, charsetName);
         } catch (IOException e) {
-            throw new SystemIOException("unable to read file");
+            throw new SystemIOException(e.toString());
         }
     }
 
@@ -98,7 +98,7 @@ public class FileUtils {
         try {
             org.apache.commons.io.FileUtils.copyDirectory(srcDir, destDir);
         } catch (IOException e) {
-            throw new SystemIOException("unable to read file");
+            throw new SystemIOException(e.toString());
         }
     }
 
@@ -106,7 +106,7 @@ public class FileUtils {
         try {
             org.apache.commons.io.FileUtils.copyDirectory(srcDir, destDir, preserveFileDate);
         } catch (IOException e) {
-            throw new SystemIOException("unable to read file");
+            throw new SystemIOException(e.toString());
         }
     }
 
@@ -114,7 +114,7 @@ public class FileUtils {
         try {
             org.apache.commons.io.FileUtils.copyDirectory(srcDir, destDir, filter);
         } catch (IOException e) {
-            throw new SystemIOException("unable to read file");
+            throw new SystemIOException(e.toString());
         }
     }
 
@@ -122,7 +122,7 @@ public class FileUtils {
         try {
             org.apache.commons.io.FileUtils.copyDirectoryToDirectory(sourceDir, destinationDir);
         } catch (IOException e) {
-            throw new SystemIOException("unable to read file");
+            throw new SystemIOException(e.toString());
         }
     }
 
@@ -130,7 +130,7 @@ public class FileUtils {
         try {
             org.apache.commons.io.FileUtils.copyFile(srcFile, destFile);
         } catch (IOException e) {
-            throw new SystemIOException("unable to read file");
+            throw new SystemIOException(e.toString());
         }
     }
 
@@ -139,7 +139,7 @@ public class FileUtils {
             org.apache.commons.io.FileUtils.copyFile(srcFile, destFile, preserveFileDate);
         } catch (
                 IOException e) {
-            throw new SystemIOException("unable to read file");
+            throw new SystemIOException(e.toString());
         }
     }
 
@@ -148,7 +148,7 @@ public class FileUtils {
             org.apache.commons.io.FileUtils.copyFile(srcFile, destFile, copyOptions);
         } catch (
                 IOException e) {
-            throw new SystemIOException("unable to read file");
+            throw new SystemIOException(e.toString());
         }
     }
 
@@ -156,7 +156,7 @@ public class FileUtils {
         try {
             return org.apache.commons.io.FileUtils.copyFile(input, output);
         } catch (IOException e) {
-            throw new SystemIOException("unable to read file");
+            throw new SystemIOException(e.toString());
         }
     }
 
@@ -164,7 +164,7 @@ public class FileUtils {
         try {
             org.apache.commons.io.FileUtils.copyFileToDirectory(srcFile, destDir);
         } catch (IOException e) {
-            throw new SystemIOException("unable to read file");
+            throw new SystemIOException(e.toString());
         }
     }
 
@@ -173,7 +173,7 @@ public class FileUtils {
             org.apache.commons.io.FileUtils.copyFileToDirectory(sourceFile, destinationDir, preserveFileDate);
         } catch (
                 IOException e) {
-            throw new SystemIOException("unable to read file");
+            throw new SystemIOException(e.toString());
         }
     }
 
@@ -181,7 +181,7 @@ public class FileUtils {
         try {
             org.apache.commons.io.FileUtils.copyInputStreamToFile(source, destination);
         } catch (IOException e) {
-            throw new SystemIOException("unable to read file");
+            throw new SystemIOException(e.toString());
         }
     }
 
@@ -189,7 +189,7 @@ public class FileUtils {
         try {
             org.apache.commons.io.FileUtils.copyToDirectory(sourceFile, destinationDir);
         } catch (IOException e) {
-            throw new SystemIOException("unable to read file");
+            throw new SystemIOException(e.toString());
         }
     }
 
@@ -197,7 +197,7 @@ public class FileUtils {
         try {
             org.apache.commons.io.FileUtils.copyToDirectory(sourceIterable, destinationDir);
         } catch (IOException e) {
-            throw new SystemIOException("unable to read file");
+            throw new SystemIOException(e.toString());
         }
     }
 
@@ -205,7 +205,7 @@ public class FileUtils {
         try {
             org.apache.commons.io.FileUtils.copyToFile(inputStream, file);
         } catch (IOException e) {
-            throw new SystemIOException("unable to read file");
+            throw new SystemIOException(e.toString());
         }
     }
 
@@ -213,7 +213,7 @@ public class FileUtils {
         try {
             org.apache.commons.io.FileUtils.copyURLToFile(source, destination);
         } catch (IOException e) {
-            throw new SystemIOException("unable to read file");
+            throw new SystemIOException(e.toString());
         }
     }
 
@@ -221,7 +221,7 @@ public class FileUtils {
         try {
             return org.apache.commons.io.FileUtils.createParentDirectories(file);
         } catch (IOException e) {
-            throw new SystemIOException("unable to read file");
+            throw new SystemIOException(e.toString());
         }
     }
 
@@ -229,7 +229,7 @@ public class FileUtils {
         try {
             return org.apache.commons.io.FileUtils.delete(file);
         } catch (IOException e) {
-            throw new SystemIOException("unable to read file");
+            throw new SystemIOException(e.toString());
         }
     }
 
@@ -237,7 +237,7 @@ public class FileUtils {
         try {
             org.apache.commons.io.FileUtils.deleteDirectory(directory);
         } catch (IOException e) {
-            throw new SystemIOException("unable to read file");
+            throw new SystemIOException(e.toString());
         }
     }
 
@@ -249,7 +249,7 @@ public class FileUtils {
         try {
             return org.apache.commons.io.FileUtils.directoryContains(directory, child);
         } catch (IOException e) {
-            throw new SystemIOException("unable to read file");
+            throw new SystemIOException(e.toString());
         }
     }
 
@@ -257,7 +257,7 @@ public class FileUtils {
         try {
             org.apache.commons.io.FileUtils.forceDelete(file);
         } catch (IOException e) {
-            throw new SystemIOException("unable to read file");
+            throw new SystemIOException(e.toString());
         }
     }
 
@@ -265,7 +265,7 @@ public class FileUtils {
         try {
             org.apache.commons.io.FileUtils.forceDeleteOnExit(file);
         } catch (IOException e) {
-            throw new SystemIOException("unable to read file");
+            throw new SystemIOException(e.toString());
         }
     }
 
@@ -273,7 +273,7 @@ public class FileUtils {
         try {
             org.apache.commons.io.FileUtils.forceMkdir(directory);
         } catch (IOException e) {
-            throw new SystemIOException("unable to read file");
+            throw new SystemIOException(e.toString());
         }
     }
 
@@ -281,7 +281,7 @@ public class FileUtils {
         try {
             org.apache.commons.io.FileUtils.forceMkdirParent(file);
         } catch (IOException e) {
-            throw new SystemIOException("unable to read file");
+            throw new SystemIOException(e.toString());
         }
     }
 
@@ -317,7 +317,7 @@ public class FileUtils {
         try {
             return org.apache.commons.io.FileUtils.isEmptyDirectory(directory);
         } catch (IOException e) {
-            throw new SystemIOException("unable to read file");
+            throw new SystemIOException(e.toString());
         }
     }
 
@@ -405,7 +405,7 @@ public class FileUtils {
         try {
             return org.apache.commons.io.FileUtils.lastModified(file);
         } catch (IOException e) {
-            throw new SystemIOException("unable to read file");
+            throw new SystemIOException(e.toString());
         }
     }
 
@@ -417,7 +417,7 @@ public class FileUtils {
         try {
             return org.apache.commons.io.FileUtils.lineIterator(file);
         } catch (IOException e) {
-            throw new SystemIOException("unable to read file");
+            throw new SystemIOException(e.toString());
         }
     }
 
@@ -425,7 +425,7 @@ public class FileUtils {
         try {
             return org.apache.commons.io.FileUtils.lineIterator(file, charsetName);
         } catch (IOException e) {
-            throw new SystemIOException("unable to read file");
+            throw new SystemIOException(e.toString());
         }
     }
 
@@ -437,7 +437,7 @@ public class FileUtils {
         try {
             org.apache.commons.io.FileUtils.moveDirectory(srcDir, destDir);
         } catch (IOException e) {
-            throw new SystemIOException("unable to read file");
+            throw new SystemIOException(e.toString());
         }
     }
 
@@ -446,7 +446,7 @@ public class FileUtils {
             org.apache.commons.io.FileUtils.moveDirectoryToDirectory(src, destDir, createDestDir);
         } catch (
                 IOException e) {
-            throw new SystemIOException("unable to read file");
+            throw new SystemIOException(e.toString());
         }
     }
 
@@ -454,7 +454,7 @@ public class FileUtils {
         try {
             org.apache.commons.io.FileUtils.moveFile(srcFile, destFile);
         } catch (IOException e) {
-            throw new SystemIOException("unable to read file");
+            throw new SystemIOException(e.toString());
         }
     }
 
@@ -462,7 +462,7 @@ public class FileUtils {
         try {
             org.apache.commons.io.FileUtils.moveFile(srcFile, destFile, copyOptions);
         } catch (IOException e) {
-            throw new SystemIOException("unable to read file");
+            throw new SystemIOException(e.toString());
         }
 
     }
@@ -471,7 +471,7 @@ public class FileUtils {
         try {
             org.apache.commons.io.FileUtils.moveFileToDirectory(srcFile, destDir, createDestDir);
         } catch (IOException e) {
-            throw new SystemIOException("unable to read file");
+            throw new SystemIOException(e.toString());
         }
     }
 
@@ -479,7 +479,7 @@ public class FileUtils {
         try {
             org.apache.commons.io.FileUtils.moveToDirectory(src, destDir, createDestDir);
         } catch (IOException e) {
-            throw new SystemIOException("unable to read file");
+            throw new SystemIOException(e.toString());
         }
     }
 
@@ -487,7 +487,7 @@ public class FileUtils {
         try {
             return org.apache.commons.io.FileUtils.openInputStream(file);
         } catch (IOException e) {
-            throw new SystemIOException("unable to read file");
+            throw new SystemIOException(e.toString());
         }
     }
 
@@ -495,7 +495,7 @@ public class FileUtils {
         try {
             return org.apache.commons.io.FileUtils.openOutputStream(file);
         } catch (IOException e) {
-            throw new SystemIOException("unable to read file");
+            throw new SystemIOException(e.toString());
         }
     }
 
@@ -503,7 +503,7 @@ public class FileUtils {
         try {
             return org.apache.commons.io.FileUtils.openOutputStream(file, append);
         } catch (IOException e) {
-            throw new SystemIOException("unable to read file");
+            throw new SystemIOException(e.toString());
         }
     }
 
@@ -511,7 +511,7 @@ public class FileUtils {
         try {
             return org.apache.commons.io.FileUtils.readFileToByteArray(file);
         } catch (IOException e) {
-            throw new SystemIOException("unable to read file");
+            throw new SystemIOException(e.toString());
         }
     }
 
@@ -519,7 +519,7 @@ public class FileUtils {
         try {
             return org.apache.commons.io.FileUtils.readFileToString(file, StandardCharsets.UTF_8);
         } catch (IOException e) {
-            throw new SystemIOException("unable to read file");
+            throw new SystemIOException();
         }
     }
 
@@ -527,7 +527,7 @@ public class FileUtils {
         try {
             return org.apache.commons.io.FileUtils.readFileToString(file, charsetName);
         } catch (IOException e) {
-            throw new SystemIOException("unable to read file");
+            throw new SystemIOException(e.toString());
         }
     }
 
@@ -535,7 +535,7 @@ public class FileUtils {
         try {
             return org.apache.commons.io.FileUtils.readFileToString(file, charsetName);
         } catch (IOException e) {
-            throw new SystemIOException("unable to read file");
+            throw new SystemIOException(e.toString());
         }
     }
 
@@ -543,7 +543,7 @@ public class FileUtils {
         try {
             return org.apache.commons.io.FileUtils.readLines(file, StandardCharsets.UTF_8);
         } catch (IOException e) {
-            throw new SystemIOException("unable to read file");
+            throw new SystemIOException(e.toString());
         }
     }
 
@@ -551,7 +551,7 @@ public class FileUtils {
         try {
             return org.apache.commons.io.FileUtils.readLines(file, charset);
         } catch (IOException e) {
-            throw new SystemIOException("unable to read file");
+            throw new SystemIOException(e.toString());
         }
     }
 
@@ -559,7 +559,7 @@ public class FileUtils {
         try {
             return org.apache.commons.io.FileUtils.readLines(file, charsetName);
         } catch (IOException e) {
-            throw new SystemIOException("unable to read file");
+            throw new SystemIOException(e.toString());
         }
     }
 
@@ -583,7 +583,7 @@ public class FileUtils {
         try {
             return org.apache.commons.io.FileUtils.streamFiles(directory, recursive, extensions);
         } catch (IOException e) {
-            throw new SystemIOException("unable to read file");
+            throw new SystemIOException(e.toString());
         }
     }
 
@@ -599,7 +599,7 @@ public class FileUtils {
         try {
             org.apache.commons.io.FileUtils.touch(file);
         } catch (IOException e) {
-            throw new SystemIOException("unable to read file");
+            throw new SystemIOException(e.toString());
         }
     }
 
@@ -607,7 +607,7 @@ public class FileUtils {
         try {
             return org.apache.commons.io.FileUtils.toURLs(files);
         } catch (IOException e) {
-            throw new SystemIOException("unable to read file");
+            throw new SystemIOException(e.toString());
         }
     }
 
@@ -619,7 +619,7 @@ public class FileUtils {
         try {
             org.apache.commons.io.FileUtils.write(file, data, StandardCharsets.UTF_8);
         } catch (IOException e) {
-            throw new SystemIOException("unable to read file");
+            throw new SystemIOException(e.toString());
         }
     }
 
@@ -627,7 +627,7 @@ public class FileUtils {
         try {
             org.apache.commons.io.FileUtils.write(file, data, StandardCharsets.UTF_8, append);
         } catch (IOException e) {
-            throw new SystemIOException("unable to read file");
+            throw new SystemIOException(e.toString());
         }
     }
 
@@ -635,7 +635,7 @@ public class FileUtils {
         try {
             org.apache.commons.io.FileUtils.write(file, data, charset);
         } catch (IOException e) {
-            throw new SystemIOException("unable to read file");
+            throw new SystemIOException(e.toString());
         }
     }
 
@@ -643,7 +643,7 @@ public class FileUtils {
         try {
             org.apache.commons.io.FileUtils.write(file, data, charsetName);
         } catch (IOException e) {
-            throw new SystemIOException("unable to read file");
+            throw new SystemIOException(e.toString());
         }
     }
 
@@ -651,7 +651,7 @@ public class FileUtils {
         try {
             org.apache.commons.io.FileUtils.writeByteArrayToFile(file, data);
         } catch (IOException e) {
-            throw new SystemIOException("unable to read file");
+            throw new SystemIOException(e.toString());
         }
     }
 
@@ -660,7 +660,7 @@ public class FileUtils {
             org.apache.commons.io.FileUtils.writeByteArrayToFile(file, data, append);
         } catch (
                 IOException e) {
-            throw new SystemIOException("unable to read file");
+            throw new SystemIOException(e.toString());
         }
     }
 
@@ -668,7 +668,7 @@ public class FileUtils {
         try {
             org.apache.commons.io.FileUtils.writeLines(file, lines);
         } catch (IOException e) {
-            throw new SystemIOException("unable to read file");
+            throw new SystemIOException(e.toString());
         }
     }
 
@@ -676,7 +676,7 @@ public class FileUtils {
         try {
             org.apache.commons.io.FileUtils.writeLines(file, lines, append);
         } catch (IOException e) {
-            throw new SystemIOException("unable to read file");
+            throw new SystemIOException(e.toString());
         }
     }
 
@@ -684,7 +684,7 @@ public class FileUtils {
         try {
             org.apache.commons.io.FileUtils.writeLines(file, lines, lineEnding);
         } catch (IOException e) {
-            throw new SystemIOException("unable to read file");
+            throw new SystemIOException(e.toString());
         }
     }
 
@@ -692,7 +692,7 @@ public class FileUtils {
         try {
             org.apache.commons.io.FileUtils.writeLines(file, charsetName, lines);
         } catch (IOException e) {
-            throw new SystemIOException("unable to read file");
+            throw new SystemIOException(e.toString());
         }
     }
 
@@ -700,7 +700,7 @@ public class FileUtils {
         try {
             org.apache.commons.io.FileUtils.writeStringToFile(file, data, StandardCharsets.UTF_8);
         } catch (IOException e) {
-            throw new SystemIOException("unable to read file");
+            throw new SystemIOException(e.toString());
         }
     }
 
@@ -708,7 +708,7 @@ public class FileUtils {
         try {
             org.apache.commons.io.FileUtils.writeStringToFile(file, data, StandardCharsets.UTF_8, append);
         } catch (IOException e) {
-            throw new SystemIOException("unable to read file");
+            throw new SystemIOException(e.toString());
         }
     }
 
@@ -716,7 +716,7 @@ public class FileUtils {
         try {
             org.apache.commons.io.FileUtils.writeStringToFile(file, data, charset);
         } catch (IOException e) {
-            throw new SystemIOException("unable to read file");
+            throw new SystemIOException(e.toString());
         }
 
     }
@@ -725,7 +725,7 @@ public class FileUtils {
         try {
             org.apache.commons.io.FileUtils.writeStringToFile(file, data, charsetName);
         } catch (IOException e) {
-            throw new SystemIOException("unable to read file");
+            throw new SystemIOException(e.toString());
         }
     }
 

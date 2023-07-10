@@ -1,4 +1,6 @@
-package com.tool.kit.collectors;
+package io.github.jiawade.tool.collectors;
+
+import com.google.common.collect.Lists;
 
 import javax.annotation.CheckForNull;
 import java.util.*;
@@ -95,15 +97,37 @@ public class Maps {
         return new EnumMap<>(map);
     }
 
-    public static <K, V> Map<K, V> mergeCollectionToMap(List<K> keys, List<V> values) {
+    public static <K, V> Map<K, V> mergeCollectionsToMap(Collection<K> keys, Collection<V> values) {
         if (keys.isEmpty()) {
             throw new IllegalArgumentException("key size must greater than 0");
         }
         if (keys.size() != values.size()) {
-            throw new IllegalArgumentException("the sieze of key and value must be equivalent");
+            throw new IllegalArgumentException("the size of key and value must be equivalent");
         }
+        List<K> key = new ArrayList<>(keys);
+        List<V> value = new ArrayList<>(values);
         return IntStream.range(0, keys.size()).boxed()
-                .collect(Collectors.toMap(keys::get, values::get));
+                .collect(Collectors.toMap(key::get, value::get));
     }
+
+    public static <R, G, V> Map<G, Map<R, V>> groupByMap(Map<R, V> originMap, Map<R, G> originCategoryMap) {
+        return originMap.entrySet().stream()
+                .collect(Collectors.groupingBy(
+                        en -> Optional.ofNullable(originCategoryMap.getOrDefault(en.getKey(), null)),
+                        Collectors.toMap(
+                                Map.Entry::getKey,
+                                Map.Entry::getValue
+                        )
+                ))
+                .entrySet().stream()
+                .collect(Collectors.toMap(en -> en.getKey().orElse(null), Map.Entry::getValue));
+    }
+
+    public static <K, V> Map<V, List<K>> groupByValue(Map<K, V> map) {
+        return map.entrySet()
+                .stream()
+                .collect(Collectors.groupingBy(Map.Entry::getValue, Collectors.mapping(Map.Entry::getKey, Collectors.toList())));
+    }
+
 
 }

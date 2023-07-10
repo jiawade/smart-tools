@@ -1,4 +1,4 @@
-package com.tool.kit.collectors;
+package io.github.jiawade.tool.collectors;
 
 
 import java.io.Serializable;

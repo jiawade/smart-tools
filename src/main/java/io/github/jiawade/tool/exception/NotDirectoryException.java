@@ -1,4 +1,4 @@
-package com.tool.kit.exception;
+package io.github.jiawade.tool.exception;
 
 public class NotDirectoryException extends RuntimeException{
     public NotDirectoryException() {

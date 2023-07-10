@@ -1,4 +1,4 @@
-package com.tool.kit.utils;
+package io.github.jiawade.tool.utils;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;

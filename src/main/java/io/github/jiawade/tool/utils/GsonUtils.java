@@ -1,4 +1,4 @@
-package com.tool.kit.utils;
+package io.github.jiawade.tool.utils;
 
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
@@ -12,8 +12,7 @@ import java.lang.reflect.Type;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class GsonUtils {
     private static final Gson gson = new GsonBuilder().setLenient().
@@ -38,6 +37,7 @@ public class GsonUtils {
         }.getType());
     }
 
+    //Type listType = new TypeToken<List<String>>() {}.getType();
     public static Object parseToObject(String jsonString, Type typeToken) {
         return gson.fromJson(jsonString, typeToken);
     }
@@ -54,6 +54,18 @@ public class GsonUtils {
 
     public static <T> T parseToClass(String jsonString, Type type) {
         return gson.fromJson(jsonString, type);
+    }
+
+    public static <T> List<?> parseToList(String jsonString, List<?> list) {
+        return gson.fromJson(jsonString, list.getClass());
+    }
+
+    public static <T> Set<?> parseToSet(String jsonString, Set<?> set) {
+        return gson.fromJson(jsonString, set.getClass());
+    }
+
+    public static <T> Collection<?> parseToCollection(String jsonString, Collection<?> collection) {
+        return gson.fromJson(jsonString, collection.getClass());
     }
 
     public static Map<String, Double> parseToStringDouble(String jsonString) {
@@ -89,13 +101,14 @@ public class GsonUtils {
         return gson.toJson(je);
     }
 
-    public static void convertJsonToJavaClass(String json, File outputDirectory, String packageName, String className) {
+    public static void generateJsonToClass(String json, File outputDirectory, String packageName, String className) {
         JCodeModel jcodeModel = new JCodeModel();
         GenerationConfig config = new DefaultGenerationConfig() {
             @Override
             public boolean isGenerateBuilders() {
                 return true;
             }
+
             @Override
             public SourceType getSourceType() {
                 return SourceType.JSON;

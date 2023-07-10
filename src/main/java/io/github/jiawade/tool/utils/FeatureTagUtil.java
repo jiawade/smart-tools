@@ -1,4 +1,4 @@
-package com.tool.kit.utils;
+package io.github.jiawade.tool.utils;
 
 
 import com.google.common.collect.Sets;

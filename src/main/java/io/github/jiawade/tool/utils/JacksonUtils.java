@@ -1,4 +1,4 @@
-package com.tool.kit.utils;
+package io.github.jiawade.tool.utils;
 
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonParser;
@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.google.gson.reflect.TypeToken;
 import com.sun.codemodel.JCodeModel;
 import lombok.extern.slf4j.Slf4j;
 import org.jsonschema2pojo.*;
@@ -15,35 +16,21 @@ import org.jsonschema2pojo.rules.RuleFactory;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
 @Slf4j
 public class JacksonUtils {
 
-    private static final ObjectMapper mapper;
+    private static final ObjectMapper mapper = new ObjectMapper().
+            configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false).
+            disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
 
-	private JacksonUtils() {
-
-	}
-
-    static {
-        mapper = new ObjectMapper();
-        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
-    }
-
-
-    public static Map<String, Object> convertJsonToMap(String jsonString) {
-        Map<String, Object> map = new HashMap<>();
-        try {
-            map = mapper.readValue(jsonString, Map.class);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return map;
+    private JacksonUtils() {
     }
 
     public static JsonNode parseStringToJsonNode(String jsonStr) {
@@ -51,23 +38,53 @@ public class JacksonUtils {
             return mapper.readTree(jsonStr);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
+        }
+        return null;
+    }
+
+
+    public static <T> T convertJsonNodeToList(JsonNode jsonNode, Class<T> type) {
+        List<T> list = new ArrayList<>();
+        try {
+            if (jsonNode == null) {
+                return null;
+            }
+            list = mapper.readValue(jsonNode.toString(), mapper.getTypeFactory().constructParametricType(List.class, type));
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return (T) list;
+    }
+
+    public static <T> T convertJsonNodeToList(String jsonString, Class<T> type) {
+        List<T> list = new ArrayList<>();
+        try {
+            list = mapper.readValue(jsonString, mapper.getTypeFactory().constructParametricType(List.class, type));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return (T) list;
+    }
+
+    public static <T> T parseToClass(String jsonString, Class<T> type) {
+        try {
+            return mapper.readValue(jsonString, type);
+        } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    public static <T> T fromJson(String json, Class<T> clazz) {
-        T object = null;
+    public static <T> T parseToClass(String json, TypeReference<T> reference) {
         try {
-            object = mapper.readValue(json, clazz);
+            return mapper.readValue(json, reference);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage(), e);
+            return null;
         }
-        return object;
     }
 
-    public static <T> T fromJson(JsonNode json, Class<T> clazz) {
+    public static <T> T parseToClass(JsonNode json, Class<T> clazz) {
         T object = null;
         try {
             object = mapper.readValue(json.toString(), clazz);
@@ -77,33 +94,25 @@ public class JacksonUtils {
         return object;
     }
 
-    public static <T> T convertJsonNodeToList(JsonNode jsonNode, Class<T> type) {
-        ArrayList<T> list = new ArrayList<>();
+    public static <K, V> Map<K, V> parseToMap(String jsonString) {
         try {
-            if (jsonNode == null) {
-                return null;
-            }
-            list = mapper.readValue(jsonNode.toString(), mapper.getTypeFactory().constructParametricType(ArrayList.class, type));
-        } catch (IOException e) {
+            return mapper.readValue(jsonString, new TypeReference<Map<K, V>>() {
+                @Override
+                public Type getType() {
+                    return super.getType();
+                }
+            });
+        } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
-        return (T) list;
+        return null;
     }
 
-    public static <T> T convertJsonNodeToList(String jsonString, Class<T> type) {
-        ArrayList<T> list = new ArrayList<>();
-        try {
-            list = mapper.readValue(jsonString, mapper.getTypeFactory().constructParametricType(ArrayList.class, type));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return (T) list;
-
-
+    public static Map<String, Object> parseToStringObject(String jsonString) {
+        return parseToMap(jsonString);
     }
 
-
-    public static <T> String toJson(T obj) {
+    public static <T> String toJsonString(T obj) {
         try {
             return mapper.writeValueAsString(obj);
         } catch (JsonProcessingException e) {
@@ -112,15 +121,6 @@ public class JacksonUtils {
         return null;
     }
 
-
-    public static <T> T fromJson(String json, TypeReference<T> reference) {
-        try {
-            return mapper.readValue(json, reference);
-        } catch (Exception e) {
-            log.error(e.getMessage(), e);
-            return null;
-        }
-    }
 
     public static <T> T fromTree(String json) {
         JsonFactory factory = new JsonFactory();
